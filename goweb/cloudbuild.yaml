@@ -2,22 +2,16 @@ substitutions:
   _FIRSTGOWEB_VERSION: 0.0.1
 
 steps:
-  - id: "teste"
-    name: gcr.io/cloud-builders/go
-    args: ["pwd"]
-  - id: "teste 2"
-    name: gcr.io/cloud-builders/go
-    args: ["ls"]
   - id: "Efetuando testes unitários"
     name: gcr.io/cloud-builders/go
     args: ["test", "./src/main/"]
     env:
-      - "GOPATH=./src"
+      - "GOPATH=$PWD"
   - id: "Compilando"    
     name: gcr.io/cloud-builders/go
     args: ["CGO_ENABLED=0", "GOOS=linux", "go", "build", "-a", "-installsuffix", "cgo", "-o", "main/src/", "./main/src/"]
     env:
-      - "GOPATH=./src"
+      - "GOPATH=$PWD"
   - id: "Gerando o container"
     name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/codeeducation-hirao/firstgoweb:${_FIRSTGOWEB_VERSION}", "-t", "gcr.io/codeeducation-hirao/firstgoweb:latest", "."]
