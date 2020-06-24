@@ -6,12 +6,12 @@ steps:
     name: gcr.io/cloud-builders/go
     args: ["test", "."]
     env:
-      - "GOPATH=."
+      - "GOPATH=./main"
   - id: "Compilando"    
     name: gcr.io/cloud-builders/go
     args: ["CGO_ENABLED=0", "GOOS=linux", "go", "build", "-a", "-installsuffix", "cgo", "-o", "main","0", "."]
     env:
-      - "GOPATH=."
+      - "GOPATH=./main"
   - id: "Gerando o container"
     name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/codeeducation-hirao/firstgoweb:${_FIRSTGOWEB_VERSION}", "-t", "gcr.io/codeeducation-hirao/firstgoweb:latest", "."]
