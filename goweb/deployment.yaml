@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-first-web
+spec:
+  selector:
+    matchLabels:
+      app: go-first-web
+  template:
+    metadata:
+      labels:
+        app: go-first-web
+    spec:
+      containers:
+      - name: go-first-web
+        image: lucasmh/firstgoweb
+        ports:
+        - containerPort: 8000

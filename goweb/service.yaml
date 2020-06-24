@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  go-first-web-service
+spec:
+  selector:
+    app:  go-first-web
+  type:  LoadBalancer
+  ports:
+  - name:  go-first-web-port
+    port:  8000
+    targetPort:  8000
