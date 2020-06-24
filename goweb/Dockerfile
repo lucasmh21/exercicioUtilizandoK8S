@@ -1,3 +1,3 @@
 FROM scratch
-COPY ./main /go
+COPY ./src/main /go
 ENTRYPOINT ["/go/main"]
