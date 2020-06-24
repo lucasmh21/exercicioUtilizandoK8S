@@ -4,14 +4,14 @@ substitutions:
 steps:
   - id: "Efetuando testes unitários"
     name: gcr.io/cloud-builders/go
-    args: ["test", ".main/src/"]
+    args: ["test", ".src/main/"]
     env:
-      - "GOPATH=./main"
+      - "GOPATH=./src"
   - id: "Compilando"    
     name: gcr.io/cloud-builders/go
     args: ["CGO_ENABLED=0", "GOOS=linux", "go", "build", "-a", "-installsuffix", "cgo", "-o", "main/src/", "./main/src/"]
     env:
-      - "GOPATH=./main"
+      - "GOPATH=./src"
   - id: "Gerando o container"
     name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "gcr.io/codeeducation-hirao/firstgoweb:${_FIRSTGOWEB_VERSION}", "-t", "gcr.io/codeeducation-hirao/firstgoweb:latest", "."]
